@@ -1,4 +1,3 @@
-// action types
 const actionTypes = {
     BUY_CAR: "BUY_CAR"
 };
@@ -11,12 +10,10 @@ const buyCar = () => {
     };
 };
 
-// state 
 const carShopInitialState = {
     availableCars: 100
 };
 
-// reducer
 const reducer = (state = carShopInitialState, action) => {
     switch (action.type) {
         case actionTypes.BUY_CAR:
