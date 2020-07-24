@@ -1,4 +1,4 @@
-# redux-concepts
+# Redux
 
 Redux concepts
 
@@ -14,7 +14,7 @@ A **reducer** which actually carries out the state transition depending on the a
 
 ### First Principle
 
-**_ "The state of your whole application is stored in an object tree withing a single store" _**
+** "The state of your whole application is stored in an object tree withing a single store" **
 
 Maintain our application state in a single object which would be managed by Redux store
 
@@ -26,7 +26,7 @@ Maintain our application state in a single object which would be managed by Redu
 
 ### Second Principle
 
-**_ "The only way to change the state is to emit an action, action is an object describing what happened" _**
+** "The only way to change the state is to emit an action, action is an object describing what happened" **
 
 To update the state of your app you need to let Redux know about that with an action
 You are not allowed to directly update the state object
@@ -39,7 +39,7 @@ You are not allowed to directly update the state object
 
 ### Third Principle
 
-**_ "To specify how the state tree is transformed by actions, you need to write pure reducers" _**
+** "To specify how the state tree is transformed by actions, you need to write pure reducers" **
 
 Reducer => (prevState, action) => newState
 
