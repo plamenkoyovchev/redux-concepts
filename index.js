@@ -1,15 +1,15 @@
 const redux = require('redux');
 const createStore = redux.createStore;
+const combineReducers = redux.combineReducers;
 
-const actionTypes = {
+const carShopActionTypes = {
     BUY_CAR: "BUY_CAR"
 };
 
 // action
 const buyCar = () => {
     return {
-        type: actionTypes.BUY_CAR,
-        info: 'First redux action'
+        type: carShopActionTypes.BUY_CAR,
     };
 };
 
@@ -17,9 +17,9 @@ const carShopInitialState = {
     availableCars: 100
 };
 
-const reducer = (state = carShopInitialState, action) => {
+const carReducer = (state = carShopInitialState, action) => {
     switch (action.type) {
-        case actionTypes.BUY_CAR:
+        case carShopActionTypes.BUY_CAR:
             return {
                 ...state,
                 availableCars: state.availableCars - 1
@@ -29,13 +29,46 @@ const reducer = (state = carShopInitialState, action) => {
     }
 };
 
+const motorShopInitialState = {
+    availableMotors: 10
+};
+
+const motorShopActionTypes = {
+    BUY_MOTOR: "BUY_MOTOR"
+};
+
+//action 
+const buyMotor = () => {
+    return {
+        type: motorShopActionTypes.BUY_MOTOR,
+    };
+};
+
+
+const motorReducer = (state = motorShopInitialState, action) => {
+    switch (action.type) {
+        case motorShopActionTypes.BUY_MOTOR:
+            return {
+                ...state,
+                availableMotors: state.availableMotors - 1
+            };
+        default:
+            return state;
+    }
+};
 
 // Application
-const carsStore = createStore(reducer);
-console.log('Initial state', carsStore.getState());
+const rootReducer = combineReducers({
+    cars: carReducer,
+    motors: motorReducer
+});
 
-const unsubscribe = carsStore.subscribe(() => console.log('Updated state', carsStore.getState()));
-carsStore.dispatch(buyCar());
-carsStore.dispatch(buyCar());
+const store = createStore(rootReducer);
+console.log('Initial state', store.getState());
+
+const unsubscribe = store.subscribe(() => console.log('Updated state', store.getState()));
+store.dispatch(buyCar());
+store.dispatch(buyCar());
+store.dispatch(buyMotor());
 
 unsubscribe();
