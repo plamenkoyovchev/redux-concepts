@@ -1,3 +1,6 @@
+const redux = require('redux');
+const createStore = redux.createStore;
+
 const actionTypes = {
     BUY_CAR: "BUY_CAR"
 };
@@ -19,9 +22,20 @@ const reducer = (state = carShopInitialState, action) => {
         case actionTypes.BUY_CAR:
             return {
                 ...state,
-                availableCars: availableCars - 1
+                availableCars: state.availableCars - 1
             };
         default:
             return state;
     }
 };
+
+
+// Application
+const carsStore = createStore(reducer);
+console.log('Initial state', carsStore.getState());
+
+const unsubscribe = carsStore.subscribe(() => console.log('Updated state', carsStore.getState()));
+carsStore.dispatch(buyCar());
+carsStore.dispatch(buyCar());
+
+unsubscribe();
