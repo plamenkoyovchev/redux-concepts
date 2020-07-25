@@ -1,6 +1,11 @@
 const redux = require('redux');
+const reduxLogger = require('redux-logger');
+
 const createStore = redux.createStore;
 const combineReducers = redux.combineReducers;
+
+const applyMiddleware = redux.applyMiddleware;
+const logger = reduxLogger.createLogger();
 
 const carShopActionTypes = {
     BUY_CAR: "BUY_CAR"
@@ -63,10 +68,10 @@ const rootReducer = combineReducers({
     motors: motorReducer
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(logger));
 console.log('Initial state', store.getState());
 
-const unsubscribe = store.subscribe(() => console.log('Updated state', store.getState()));
+const unsubscribe = store.subscribe(() => { });
 store.dispatch(buyCar());
 store.dispatch(buyCar());
 store.dispatch(buyMotor());
