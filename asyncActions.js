@@ -31,7 +31,7 @@ const fetchUsersSuccess = (users) => {
     };
 };
 
-const fetchUsersFalure = (error) => {
+const fetchUsersFailure = (error) => {
     return {
         type: actionTypes.FETCH_USERS_FAILURE,
         payload: error
@@ -73,7 +73,7 @@ const fetchUsers = () => {
                 dispatch(fetchUsersSuccess(users));
             })
             .catch(error => {
-                dispatch(fetchUsersFalure(error.message));
+                dispatch(fetchUsersFailure(error.message));
             });
     };
 };
