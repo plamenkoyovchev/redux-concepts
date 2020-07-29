@@ -3,6 +3,8 @@ const createStore = redux.createStore;
 
 const applyMiddleware = redux.applyMiddleware;
 const thunkMiddleware = require('redux-thunk').default;
+const reduxLogger = require('redux-logger');
+const logger = reduxLogger.createLogger();
 
 const axios = require('axios');
 
@@ -49,14 +51,14 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                users: action.payload,
-                error: ''
+                    users: action.payload,
+                    error: ''
             };
         case actionTypes.FETCH_USERS_FAILURE:
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                    error: action.payload
             };
         default:
             return state;
@@ -78,6 +80,6 @@ const fetchUsers = () => {
     };
 };
 
-const store = createStore(reducer, applyMiddleware(thunkMiddleware));
+const store = createStore(reducer, applyMiddleware(thunkMiddleware, logger));
 store.subscribe(() => console.log(store.getState()));
 store.dispatch(fetchUsers());
